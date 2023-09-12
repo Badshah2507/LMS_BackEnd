@@ -1,9 +1,6 @@
 package com.wellsfargo.lms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -12,7 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "UUID", initialValue = 101, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "UUID")
     @Setter(AccessLevel.NONE)
     private Long id;
     private String name;
