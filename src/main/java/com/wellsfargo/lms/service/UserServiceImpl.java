@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     private static String encryptString(String str) {
         StringBuilder sb = new StringBuilder();
@@ -23,12 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String saveUser(User user) {
-        User u = new User();
-        u.setName(user.getName());
-        u.setRole(user.getRole());
-        u.setPassword(encryptString(user.getPassword()));
         try {
-            userRepository.save(u);
+            userRepository.save(user);
             return "User Saved :-) !!!!";
         } catch (Exception e) {
             return "User NOT saved !!!!!!!!!!";
