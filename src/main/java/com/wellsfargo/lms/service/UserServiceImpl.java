@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String saveUser(User user) {
+        user.setPassword(encryptString(user.getPassword()));
         try {
             userRepository.save(user);
             return "User Saved :-) !!!!";
