@@ -5,6 +5,9 @@ import com.wellsfargo.lms.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -27,12 +30,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(User userDto) {
+    public Map<String, String> login(User userDto) {
         User user = findUserByName(userDto.getName());
         if (user != null) {
             String pwdInDb = user.getPassword();
             if (pwdInDb.equals(userDto.getPassword())) {
-                return user;
+                Map<String, String> responseBody = new HashMap<>();
+                responseBody.put("name", user.getName());
+                responseBody.put("role", user.getRole());
+                return responseBody;
             } else {
                 return null;
             }

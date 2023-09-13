@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping
@@ -43,8 +44,8 @@ public class LmsController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User userDto) {
-        User user = userService.login(userDto);
+    public ResponseEntity<Map<String, String>> login(@RequestBody User userDto) {
+        Map<String, String> user = userService.login(userDto);
         if (user == null) {
             return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
         } else {
