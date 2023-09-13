@@ -55,8 +55,13 @@ public class LmsController {
     }
 
     @PostMapping("/addEmployee")
-    public String addEmployee(@RequestBody Employee empDto) {
-        return employeeDataService.addEmployee(empDto);
+    public ResponseEntity<String> addEmployee(@RequestBody Employee empDto) {
+        String response = employeeDataService.addEmployee(empDto);
+        if (response != null) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

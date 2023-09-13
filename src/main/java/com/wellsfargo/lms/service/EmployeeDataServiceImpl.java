@@ -16,7 +16,7 @@ public class EmployeeDataServiceImpl implements EmployeeDataService{
             employeeRepository.save(empDto);
             return "Employee was Added";
         } catch (Exception e) {
-            return "Employee was NOT Added \n"+e.getMessage();
+            return null;
         }
 
 
