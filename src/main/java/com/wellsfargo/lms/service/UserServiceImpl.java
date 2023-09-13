@@ -11,19 +11,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    private static String encryptString(String str) {
-        StringBuilder sb = new StringBuilder();
-        char[] c =str.toCharArray();
-        for(char c1 : c){
-            c1 = (char) (c1 + 2);
-            sb.append(c1);
-        }
-        return sb.toString();
-    }
 
     @Override
     public String saveUser(User user) {
-        user.setPassword(encryptString(user.getPassword()));
         try {
             userRepository.save(user);
             return "User Saved :-) !!!!";
@@ -41,7 +31,7 @@ public class UserServiceImpl implements UserService {
         User user = findUserByName(userDto.getName());
         if (user != null) {
             String pwdInDb = user.getPassword();
-            if (pwdInDb.equals(encryptString(userDto.getPassword()))) {
+            if (pwdInDb.equals(userDto.getPassword())) {
                 return user;
             } else {
                 return null;

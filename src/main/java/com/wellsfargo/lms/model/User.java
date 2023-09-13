@@ -3,6 +3,9 @@ package com.wellsfargo.lms.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,4 +20,8 @@ public class User {
     private String password;
     private String role;
 
+    public void setPassword(String password) {
+        Base64.Encoder encoder = Base64.getEncoder();
+        this.password = encoder.encodeToString(password.getBytes(StandardCharsets.UTF_8));
+    }
 }
