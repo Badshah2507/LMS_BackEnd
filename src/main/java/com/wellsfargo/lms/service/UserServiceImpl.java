@@ -39,11 +39,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(User userDto) {
         User user = findUserByName(userDto.getName());
-        String pwdInDb = user.getPassword();
-        if (pwdInDb.equals(encryptString(userDto.getPassword()))) {
-            return user;
+        if (user != null) {
+            String pwdInDb = user.getPassword();
+            if (pwdInDb.equals(encryptString(userDto.getPassword()))) {
+                return user;
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
+
     }
 }

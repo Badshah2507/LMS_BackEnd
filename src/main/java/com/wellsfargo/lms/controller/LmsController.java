@@ -66,6 +66,7 @@ public class LmsController {
     public ResponseEntity<List<Item>> getAllItems() {
         List<Item> response = itemDataService.getAllItems();
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @PostMapping("/addLoanCardDetails")
     public String addLoanCardDetails(@RequestBody LoanCard loanCardDto)
