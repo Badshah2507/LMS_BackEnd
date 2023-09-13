@@ -1,5 +1,6 @@
 package com.wellsfargo.lms.service;
 
+import com.wellsfargo.lms.model.Item;
 import com.wellsfargo.lms.model.User;
 
 
