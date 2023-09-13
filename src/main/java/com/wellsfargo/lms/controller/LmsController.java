@@ -1,10 +1,15 @@
 package com.wellsfargo.lms.controller;
 
 import com.wellsfargo.lms.model.Employee;
+
+import com.wellsfargo.lms.model.Item;
+import com.wellsfargo.lms.service.ItemDataService;
+
 import com.wellsfargo.lms.model.LoanCard;
 import com.wellsfargo.lms.model.User;
 import com.wellsfargo.lms.service.EmployeeDataService;
 import com.wellsfargo.lms.service.LoanCardDataService;
+
 import com.wellsfargo.lms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +26,8 @@ public class LmsController {
     UserService userService;
     @Autowired
     EmployeeDataService employeeDataService;
+    @Autowired
+    ItemDataService itemDataService;
 
     @Autowired
     LoanCardDataService loanCardDataService;
@@ -51,6 +58,15 @@ public class LmsController {
         return employeeDataService.addEmployee(empDto);
     }
 
+
+    @PostMapping("/addItem")
+    public String addItem(@RequestBody Item itemDto) { return itemDataService.addItemData(itemDto); }
+
+    @GetMapping("/getAllItems")
+    public ResponseEntity<List<Item>> getAllItems() {
+        List<Item> response = itemDataService.getAllItems();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     @PostMapping("/addLoanCardDetails")
     public String addLoanCardDetails(@RequestBody LoanCard loanCardDto)
     {
@@ -63,5 +79,6 @@ public class LmsController {
         List<LoanCard> loanCards = loanCardDataService.getAllLoanCards();
 
         return new ResponseEntity<>(loanCards, HttpStatus.OK);
+
     }
 }
