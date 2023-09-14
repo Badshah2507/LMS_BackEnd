@@ -1,16 +1,32 @@
 package com.wellsfargo.lms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class EmployeeCard {
+
     @Id
-    private String loanId;
-    private String employeeId;
+    @Setter(AccessLevel.NONE)
+    @SequenceGenerator(name = "EC_UID", initialValue = 101, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EC_UID")
+    private Long EmployeeCardId;
+
+    @ManyToOne
+    @JoinColumn(name = "loan_id")
+    private LoanCard loanCard;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     private Date cardIssueDate;
 }
