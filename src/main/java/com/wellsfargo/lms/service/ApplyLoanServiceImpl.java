@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.swing.text.html.Option;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -41,49 +41,42 @@ public class ApplyLoanServiceImpl implements ApplyLoanService{
 
     public String saveApplyLoanData(Map<String,String> applyLoanDetails)
     {
-        Calendar calendar =Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = calendar.getTime();
-
-        calendar.add(Calendar.YEAR , loanCardRepository.findByLoanType(applyLoanDetails.get("itemCategory")).getLoanDurationYrs());
-        Date returnDate = calendar.getTime();
+        long millis = System.currentTimeMillis();
+        Date issueDate = new Date(millis);
+        Calendar c = Calendar.getInstance();
+        c.setTime(issueDate);
+        c.add(Calendar.YEAR, loanCardRepository.findByLoanType(applyLoanDetails.get("itemCategory")).getLoanDurationYrs());
+        Date returnDate = new Date(c.getTimeInMillis());
 
         Employee empDAO = new Employee();
         LoanCard loanCardDAO = new LoanCard();
         Item itemDAO = new Item();
 
-        System.out.println("Here1");
 
         try {
             empDAO = fetchEmployee(applyLoanDetails.get("employeeId"));
-            loanCardDAO = fetchLoanCard(applyLoanDetails.get("loanType"));
+            loanCardDAO = fetchLoanCard(applyLoanDetails.get("itemCategory"));
             itemDAO = fetchItem(applyLoanDetails.get("itemCategory"), applyLoanDetails.get("itemDescription"));
 
-            System.out.println("Here2");
-//            System.out.println(empDAO.toString());
-            System.out.println(loanCardDAO.toString());
-            System.out.println(itemDAO.toString());
-
             EmployeeCard employeeCard = EmployeeCard.builder()
-                    .cardIssueDate(java.sql.Date.valueOf(formatter.format(date)))
+                    .cardIssueDate(issueDate)
                     .loanCard(loanCardDAO)
                     .employee(empDAO)
                     .build();
 
-
             EmployeeIssueDetails employeeIssueDetails = EmployeeIssueDetails.builder()
-                    .issueDate(java.sql.Date.valueOf(formatter.format(date)))
-                    .returnDate(java.sql.Date.valueOf(formatter.format(returnDate)))
+                    .issueDate(issueDate)
+                    .returnDate(returnDate)
                     .employee(empDAO)
                     .item(itemDAO)
                     .build();
 
-            System.out.println("Here3");
-            System.out.println(employeeCard.toString());
-            System.out.println(employeeIssueDetails.toString());
-
-            employeeCardRepository.save(employeeCard);
-            employeeIssueDetailsRepository.save(employeeIssueDetails);
+            try {
+                employeeCardRepository.save(employeeCard);
+                employeeIssueDetailsRepository.save(employeeIssueDetails);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
             return "Loan Applied Successfully";
 

@@ -16,7 +16,7 @@ public class EmployeeIssueDetails {
     @Id
     @SequenceGenerator(name = "EI_UID", initialValue = 101, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EI_UID")
-    private String issueId;
+    private Long issueId;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")

@@ -18,7 +18,7 @@ public class EmployeeCard {
     @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "EC_UID", initialValue = 101, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EC_UID")
-    private String EmployeeCardId;
+    private Long EmployeeCardId;
 
     @ManyToOne
     @JoinColumn(name = "loan_id")
