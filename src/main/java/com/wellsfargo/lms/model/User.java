@@ -1,10 +1,10 @@
 package com.wellsfargo.lms.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Entity
 @Data
@@ -12,11 +12,16 @@ import lombok.*;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "UUID", initialValue = 101, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "UUID")
     @Setter(AccessLevel.NONE)
     private Long id;
     private String name;
     private String password;
     private String role;
 
+    public void setPassword(String password) {
+        Base64.Encoder encoder = Base64.getEncoder();
+        this.password = encoder.encodeToString(password.getBytes(StandardCharsets.UTF_8));
+    }
 }

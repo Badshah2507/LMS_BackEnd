@@ -24,8 +24,8 @@ public class Employee {
     String designation;
     String department;
     String gender;
-    @JsonFormat(pattern = "dd/mm/yyyy")
+    @JsonFormat(pattern = "yyyy-mm-dd")
     Date dateOfBirth;
-    @JsonFormat(pattern = "dd/mm/yyyy")
+    @JsonFormat(pattern = "yyyy-mm-dd")
     Date dateOfJoining;
 }
