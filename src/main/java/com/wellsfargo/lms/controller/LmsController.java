@@ -64,6 +64,12 @@ public class LmsController {
         }
     }
 
+    @GetMapping("/getAllEmployees")
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> response = employeeDataService.getAllEmployees();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
     @PostMapping("/addItem")
     public String addItem(@RequestBody Item itemDto) { return itemDataService.addItemData(itemDto); }

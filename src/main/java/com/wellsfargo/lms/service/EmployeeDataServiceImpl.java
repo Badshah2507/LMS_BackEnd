@@ -5,6 +5,8 @@ import com.wellsfargo.lms.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeDataServiceImpl implements EmployeeDataService{
 
@@ -18,7 +20,17 @@ public class EmployeeDataServiceImpl implements EmployeeDataService{
         } catch (Exception e) {
             return null;
         }
+    }
 
-
+    @Override
+    public List<Employee> getAllEmployees() {
+        try
+        {
+            return employeeRepository.findAll();
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
     }
 }
