@@ -5,7 +5,7 @@ import com.wellsfargo.lms.repository.EmployeeCardRepository;
 import java.util.Map;
 
 public interface ApplyLoanService {
-    void saveApplyLoanData(Map<String,String> applyLoanDetails);
+    String saveApplyLoanData(Map<String,String> applyLoanDetails);
 
 
 }

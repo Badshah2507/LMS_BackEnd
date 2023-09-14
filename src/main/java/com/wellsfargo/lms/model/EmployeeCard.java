@@ -11,13 +11,22 @@ import java.sql.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class EmployeeCard {
-    @Id
 
-    private String loanId;
-    private String employeeId;
+    @Id
+    @Setter(AccessLevel.NONE)
+    @SequenceGenerator(name = "EC_UID", initialValue = 101, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EC_UID")
+    private String EmployeeCardId;
+
+    @ManyToOne
+    @JoinColumn(name = "loan_id")
+    private LoanCard loanCard;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     private Date cardIssueDate;
-//    @OneToOne
-//    @JoinColumn(name = "loan_id")
-//    private LoanCard loanCard;
 }

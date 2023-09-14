@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping
-public class LmsController {
+public class LmsAdminController {
 
     @Autowired
     UserService userService;
