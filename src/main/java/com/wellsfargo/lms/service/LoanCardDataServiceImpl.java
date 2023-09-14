@@ -36,6 +36,7 @@ public class LoanCardDataServiceImpl implements LoanCardDataService{
         }
         catch(Exception e)
         {
+            System.out.println(e.getMessage());
             return null;
         }
     }
