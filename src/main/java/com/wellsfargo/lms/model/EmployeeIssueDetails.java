@@ -1,6 +1,7 @@
 package com.wellsfargo.lms.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,12 +22,12 @@ public class EmployeeIssueDetails {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @JsonIgnore
+    @JsonManagedReference
     private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
-    @JsonIgnore
+    @JsonManagedReference
     private Item item;
 
     private Date issueDate;
