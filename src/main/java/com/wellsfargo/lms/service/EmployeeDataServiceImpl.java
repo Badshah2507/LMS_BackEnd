@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeDataServiceImpl implements EmployeeDataService{
@@ -30,6 +31,20 @@ public class EmployeeDataServiceImpl implements EmployeeDataService{
         }
         catch(Exception e)
         {
+            return null;
+        }
+    }
+
+    @Override
+    public String deleteEmployee(String empId) {
+        try
+        {
+            employeeRepository.deleteById(empId);
+            return "Employee was deleted!";
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
             return null;
         }
     }

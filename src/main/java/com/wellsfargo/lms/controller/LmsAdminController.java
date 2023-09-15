@@ -71,6 +71,11 @@ public class LmsAdminController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping("/deleteEmployee")
+    public String deleteEmployee(@RequestBody String empId)
+    {
+        return employeeDataService.deleteEmployee(empId);
+    }
 
     @PostMapping("/addItem")
     public String addItem(@RequestBody Item itemDto) { return itemDataService.addItemData(itemDto); }
@@ -80,6 +85,9 @@ public class LmsAdminController {
         List<Item> response = itemDataService.getAllItems();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PostMapping("/deleteItem")
+    public String deleteItem(@RequestBody String itemId) { return itemDataService.deleteItemData(itemId); }
 
     @PostMapping("/addLoanCardDetails")
     public String addLoanCardDetails(@RequestBody LoanCard loanCardDto)

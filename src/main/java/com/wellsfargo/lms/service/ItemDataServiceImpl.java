@@ -25,4 +25,18 @@ public class ItemDataServiceImpl implements ItemDataService{
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
+
+    @Override
+    public String deleteItemData(String itemId) {
+        try
+        {
+            itemRepository.deleteById(itemId);
+            return "Item was deleted!";
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

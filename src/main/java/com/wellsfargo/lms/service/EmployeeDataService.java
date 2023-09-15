@@ -8,4 +8,6 @@ public interface EmployeeDataService {
     String addEmployee(Employee empDto);
 
     List<Employee> getAllEmployees();
+
+    String deleteEmployee(String empId);
 }
