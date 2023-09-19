@@ -12,7 +12,7 @@ public class EmployeeIssueDetailsServiceImpl implements EmployeeIssueDetailsServ
     @Autowired
     EmployeeIssueDetailsRepository employeeIssueDetailsRepository;
     @Override
-    public List<EmployeeIssueDetails> getAllEmpIssues() {
-        return employeeIssueDetailsRepository.findAll();
+    public List<EmployeeIssueDetails> getAllEmpIssues(String empId) {
+        return employeeIssueDetailsRepository.findAllByEmployeeId(empId);
     }
 }

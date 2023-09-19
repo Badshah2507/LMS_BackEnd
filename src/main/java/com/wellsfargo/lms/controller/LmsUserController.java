@@ -31,13 +31,13 @@ public class LmsUserController {
     }
 
     @GetMapping("/getEmployeeCard")
-    public ResponseEntity<List<EmployeeCard>> getEmployeeCards() {
-        return new ResponseEntity<>(employeeCardService.getEmployeeCard(), HttpStatus.OK);
+    public ResponseEntity<List<EmployeeCard>> getEmployeeCards(@RequestParam("emplId") String empId) {
+        return new ResponseEntity<>(employeeCardService.getEmployeeCard(empId), HttpStatus.OK);
     }
 
     @GetMapping("/getEmplIssues")
-    public ResponseEntity<List<EmployeeIssueDetails>> getEmpIssues() {
-        return new ResponseEntity<>(employeeIssueDetailsService.getAllEmpIssues(), HttpStatus.OK);
+    public ResponseEntity<List<EmployeeIssueDetails>> getEmpIssues(@RequestParam("emplId") String empId) {
+        return new ResponseEntity<>(employeeIssueDetailsService.getAllEmpIssues(empId), HttpStatus.OK);
     }
 
 }

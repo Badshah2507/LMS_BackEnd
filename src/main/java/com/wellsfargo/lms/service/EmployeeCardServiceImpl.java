@@ -12,7 +12,8 @@ public class EmployeeCardServiceImpl implements EmployeeCardService{
     @Autowired
     EmployeeCardRepository employeeCardRepository;
     @Override
-    public List<EmployeeCard> getEmployeeCard() {
-        return employeeCardRepository.findAll();
+    public List<EmployeeCard> getEmployeeCard(String empId) {
+        return employeeCardRepository.findAllByEmployeeId(empId);
+//        return null;
     }
 }

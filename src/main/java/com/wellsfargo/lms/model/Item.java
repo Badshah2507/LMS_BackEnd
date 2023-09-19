@@ -1,6 +1,7 @@
 package com.wellsfargo.lms.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -20,6 +21,6 @@ public class Item {
     private Integer itemValuation;
 
     @OneToMany(mappedBy = "item")
-    @JsonBackReference
+    @JsonIgnore
     private List<EmployeeIssueDetails> employeeIssueDetails;
 }

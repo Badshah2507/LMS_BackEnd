@@ -5,5 +5,5 @@ import com.wellsfargo.lms.model.EmployeeCard;
 import java.util.List;
 
 public interface EmployeeCardService {
-    List<EmployeeCard> getEmployeeCard();
+    List<EmployeeCard> getEmployeeCard(String empId);
 }

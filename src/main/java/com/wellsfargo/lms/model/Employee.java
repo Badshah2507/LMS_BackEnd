@@ -2,6 +2,7 @@ package com.wellsfargo.lms.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,9 +30,9 @@ public class Employee {
     Date dateOfJoining;
 
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
+    @JsonIgnore
     private List<EmployeeIssueDetails> employeeIssueDetails;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
+    @JsonIgnore
     private List<EmployeeCard> employeeCards;
 }
