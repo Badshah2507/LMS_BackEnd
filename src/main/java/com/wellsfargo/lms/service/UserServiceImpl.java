@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
                 Map<String, String> responseBody = new HashMap<>();
                 responseBody.put("name", user.getName());
                 responseBody.put("role", user.getRole());
+                responseBody.put("empId", user.getEmployeeId());
                 return responseBody;
             } else {
                 return null;
