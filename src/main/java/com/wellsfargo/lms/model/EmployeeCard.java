@@ -33,4 +33,12 @@ public class EmployeeCard {
     private Employee employee;
 
     private Date cardIssueDate;
+
+    @Override
+    public String toString() {
+        return "EmployeeCard{" +
+                "employeeCardId=" + EmployeeCardId +
+                ", cardIssueDate=" + cardIssueDate +
+                '}';
+    }
 }

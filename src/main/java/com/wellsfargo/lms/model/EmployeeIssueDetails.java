@@ -32,4 +32,13 @@ public class EmployeeIssueDetails {
 
     private Date issueDate;
     private Date returnDate;
+
+    @Override
+    public String toString() {
+        return "EmployeeIssueDetails{" +
+                "issueId=" + issueId +
+                ", issueDate=" + issueDate +
+                ", returnDate=" + returnDate +
+                '}';
+    }
 }

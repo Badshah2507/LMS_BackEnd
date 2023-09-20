@@ -2,6 +2,7 @@ package com.wellsfargo.lms.controller;
 
 import com.wellsfargo.lms.model.EmployeeCard;
 import com.wellsfargo.lms.model.EmployeeIssueDetails;
+import com.wellsfargo.lms.repository.ItemRepository;
 import com.wellsfargo.lms.service.ApplyLoanService;
 import com.wellsfargo.lms.service.ApplyLoanServiceImpl;
 import com.wellsfargo.lms.service.EmployeeCardService;
@@ -23,6 +24,8 @@ public class LmsUserController {
     EmployeeCardService employeeCardService;
     @Autowired
     EmployeeIssueDetailsService employeeIssueDetailsService;
+    @Autowired
+    ItemRepository itemRepository;
 
     @PostMapping("/applyLoan")
     public String applyLoan(@RequestBody Map<String, String> employeeLoanDetails)
@@ -38,6 +41,16 @@ public class LmsUserController {
     @GetMapping("/getEmplIssues")
     public ResponseEntity<List<EmployeeIssueDetails>> getEmpIssues(@RequestParam("emplId") String empId) {
         return new ResponseEntity<>(employeeIssueDetailsService.getAllEmpIssues(empId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getItemCat")
+    public ResponseEntity<List<String>> getitemCat() {
+        return new ResponseEntity<>(itemRepository.getItemCat(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getItemDesc")
+    public ResponseEntity<List<String>> getItemDesc(@RequestParam("itemCat") String itemCat) {
+        return new ResponseEntity<>(itemRepository.getItemDesc(itemCat), HttpStatus.OK);
     }
 
 }

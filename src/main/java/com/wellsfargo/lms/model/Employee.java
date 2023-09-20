@@ -24,9 +24,9 @@ public class Employee {
     String designation;
     String department;
     String gender;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date dateOfBirth;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date dateOfJoining;
 
     @OneToMany(mappedBy = "employee")
@@ -35,4 +35,17 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     private List<EmployeeCard> employeeCards;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId='" + employeeId + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", designation='" + designation + '\'' +
+                ", department='" + department + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfJoining=" + dateOfJoining +
+                '}';
+    }
 }

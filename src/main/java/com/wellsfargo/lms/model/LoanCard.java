@@ -3,14 +3,17 @@ package com.wellsfargo.lms.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class LoanCard {
 
     @Id
@@ -22,4 +25,12 @@ public class LoanCard {
     @JsonIgnore
     private List<EmployeeCard> employeeCards;
 
+    @Override
+    public String toString() {
+        return "LoanCard{" +
+                "loanId='" + loanId + '\'' +
+                ", loanType='" + loanType + '\'' +
+                ", loanDurationYrs=" + loanDurationYrs +
+                '}';
+    }
 }

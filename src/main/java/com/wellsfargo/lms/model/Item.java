@@ -5,12 +5,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Item {
     @Id
     private String itemId;
@@ -23,4 +28,16 @@ public class Item {
     @OneToMany(mappedBy = "item")
     @JsonIgnore
     private List<EmployeeIssueDetails> employeeIssueDetails;
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId='" + itemId + '\'' +
+                ", itemDescription='" + itemDescription + '\'' +
+                ", issueStatus='" + issueStatus + '\'' +
+                ", itemMake='" + itemMake + '\'' +
+                ", itemCategory='" + itemCategory + '\'' +
+                ", itemValuation=" + itemValuation +
+                '}';
+    }
 }

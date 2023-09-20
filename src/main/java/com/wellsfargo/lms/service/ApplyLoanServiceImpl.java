@@ -4,6 +4,7 @@ import com.wellsfargo.lms.exception.DataNotFound;
 import com.wellsfargo.lms.model.*;
 import com.wellsfargo.lms.repository.*;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-
+@Slf4j
 public class ApplyLoanServiceImpl implements ApplyLoanService{
     @Autowired
     private EmployeeCardRepository employeeCardRepository;
@@ -76,17 +77,20 @@ public class ApplyLoanServiceImpl implements ApplyLoanService{
                     .employee(empDAO)
                     .item(itemDAO)
                     .build();
-
             try {
                 employeeCardRepository.save(employeeCard);
                 employeeIssueDetailsRepository.save(employeeIssueDetails);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
+                return null;
             }
 
             return "Loan Applied Successfully";
 
         } catch (Exception e) {
+            log.error(e.getMessage());
+            log.error(e.getLocalizedMessage());
+            log.error(String.valueOf(e.getCause()));
             return null;
         }
 
