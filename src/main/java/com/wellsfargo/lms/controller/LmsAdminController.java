@@ -47,12 +47,7 @@ public class LmsAdminController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody User userDto) {
         Map<String, String> user = userService.login(userDto);
-        if (user == null) {
-            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-        } else {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        }
-
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/addEmployee")

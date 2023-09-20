@@ -1,7 +1,9 @@
 package com.wellsfargo.lms.service;
 
+import com.wellsfargo.lms.exception.UserNotFound;
 import com.wellsfargo.lms.model.User;
 import com.wellsfargo.lms.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -21,6 +24,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return "User Saved :-) !!!!";
         } catch (Exception e) {
+            log.error(e.getMessage());
             return "User NOT saved !!!!!!!!!!";
         }
     }
@@ -41,10 +45,10 @@ public class UserServiceImpl implements UserService {
                 responseBody.put("empId", user.getEmployeeId());
                 return responseBody;
             } else {
-                return null;
+                throw new UserNotFound("Password is Incorrect");
             }
         } else {
-            return null;
+            throw new UserNotFound("Username doesn't exist");
         }
 
     }

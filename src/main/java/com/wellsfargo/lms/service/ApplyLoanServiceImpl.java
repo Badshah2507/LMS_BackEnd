@@ -1,5 +1,6 @@
 package com.wellsfargo.lms.service;
 
+import com.wellsfargo.lms.exception.DataNotFound;
 import com.wellsfargo.lms.model.*;
 import com.wellsfargo.lms.repository.*;
 import jakarta.transaction.Transactional;
@@ -45,7 +46,12 @@ public class ApplyLoanServiceImpl implements ApplyLoanService{
         Date issueDate = new Date(millis);
         Calendar c = Calendar.getInstance();
         c.setTime(issueDate);
-        c.add(Calendar.YEAR, loanCardRepository.findByLoanType(applyLoanDetails.get("itemCategory")).getLoanDurationYrs());
+        LoanCard loanObj = loanCardRepository.findByLoanType(applyLoanDetails.get("itemCategory"));
+        if (loanObj == null) {
+            throw new DataNotFound("No Such Item Category exists");
+        } else {
+            c.add(Calendar.YEAR, loanCardRepository.findByLoanType(applyLoanDetails.get("itemCategory")).getLoanDurationYrs());
+        }
         Date returnDate = new Date(c.getTimeInMillis());
 
         Employee empDAO = new Employee();

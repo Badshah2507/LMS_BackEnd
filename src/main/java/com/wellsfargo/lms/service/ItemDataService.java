@@ -7,6 +7,5 @@ import java.util.List;
 public interface ItemDataService {
     String addItemData(Item itemDto);
     List<Item> getAllItems();
-
     String deleteItemData(String itemId);
 }

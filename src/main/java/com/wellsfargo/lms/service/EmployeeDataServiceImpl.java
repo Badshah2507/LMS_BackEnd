@@ -2,6 +2,7 @@ package com.wellsfargo.lms.service;
 
 import com.wellsfargo.lms.model.Employee;
 import com.wellsfargo.lms.repository.EmployeeRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class EmployeeDataServiceImpl implements EmployeeDataService{
 
     @Autowired
@@ -19,6 +21,7 @@ public class EmployeeDataServiceImpl implements EmployeeDataService{
             employeeRepository.save(empDto);
             return "Employee was Added";
         } catch (Exception e) {
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -31,6 +34,7 @@ public class EmployeeDataServiceImpl implements EmployeeDataService{
         }
         catch(Exception e)
         {
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -44,7 +48,7 @@ public class EmployeeDataServiceImpl implements EmployeeDataService{
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             return null;
         }
     }

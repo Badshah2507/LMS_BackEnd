@@ -2,12 +2,14 @@ package com.wellsfargo.lms.service;
 
 import com.wellsfargo.lms.model.LoanCard;
 import com.wellsfargo.lms.repository.LoanCardRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class LoanCardDataServiceImpl implements LoanCardDataService{
 
     @Autowired
@@ -23,6 +25,7 @@ public class LoanCardDataServiceImpl implements LoanCardDataService{
         }
         catch(Exception e)
         {
+            log.error(e.getMessage());
             return "Unable to add loan card!: " + e.getMessage();
         }
 
@@ -36,7 +39,7 @@ public class LoanCardDataServiceImpl implements LoanCardDataService{
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+           log.error(e.getMessage());
             return null;
         }
     }
