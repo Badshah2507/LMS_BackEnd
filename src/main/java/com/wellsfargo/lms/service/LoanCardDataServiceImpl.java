@@ -39,7 +39,7 @@ public class LoanCardDataServiceImpl implements LoanCardDataService{
         }
         catch(Exception e)
         {
-           log.error(e.getMessage());
+            log.error(e.getMessage());
             return null;
         }
     }
