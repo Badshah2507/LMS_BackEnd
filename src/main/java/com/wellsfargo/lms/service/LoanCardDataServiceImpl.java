@@ -43,4 +43,18 @@ public class LoanCardDataServiceImpl implements LoanCardDataService{
             return null;
         }
     }
+
+    @Override
+    public String deleteLoanCard(String loanId) {
+        try
+        {
+            loanCardRepository.deleteById(loanId);
+            return "Loan Card was deleted!";
+        }
+        catch(Exception e)
+        {
+            log.error(e.getMessage());
+            return null;
+        }
+    }
 }

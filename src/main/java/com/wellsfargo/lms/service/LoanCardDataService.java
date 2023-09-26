@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface LoanCardDataService {
     String addLoanCard(LoanCard loanCardDto);
-
     List<LoanCard> getAllLoanCards();
+    String deleteLoanCard(String loanId);
 }

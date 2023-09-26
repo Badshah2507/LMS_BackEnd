@@ -99,4 +99,6 @@ public class LmsAdminController {
 
     }
 
+    @PostMapping("/deleteLoanCard")
+    public String deleteLoanCard(@RequestBody String loanId) { return loanCardDataService.deleteLoanCard(loanId); }
 }
