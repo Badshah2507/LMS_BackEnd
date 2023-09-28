@@ -3,6 +3,8 @@ package com.wellsfargo.lms.service;
 import com.wellsfargo.lms.model.Employee;
 import com.wellsfargo.lms.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -11,11 +13,23 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class EmployeeDataServiceImplTest {
+
+    @Autowired
+    private EmployeeDataServiceImpl employeeDataServiceImpl;
 
     @Autowired
     EmployeeDataService employeeDataService;
@@ -36,6 +50,37 @@ class EmployeeDataServiceImplTest {
 
         String response = employeeDataService.addEmployee(employee);
         assertEquals("Employee was Added", response);
+    }
+
+    /**
+     * Method under test: {@link EmployeeDataServiceImpl#addEmployee(Employee)}
+     */
+    @Test
+    void testAddEmployee() {
+        Employee employee = new Employee();
+        employee.setDateOfBirth(mock(Date.class));
+        employee.setDateOfJoining(mock(Date.class));
+        employee.setDepartment("Department");
+        employee.setDesignation("Designation");
+        employee.setEmployeeCards(new ArrayList<>());
+        employee.setEmployeeId("42");
+        employee.setEmployeeIssueDetails(new ArrayList<>());
+        employee.setEmployeeName("Employee Name");
+        employee.setGender("Gender");
+        when(employeeRepository.save(Mockito.<Employee>any())).thenReturn(employee);
+
+        Employee empDto = new Employee();
+        empDto.setDateOfBirth(mock(Date.class));
+        empDto.setDateOfJoining(mock(Date.class));
+        empDto.setDepartment("Department");
+        empDto.setDesignation("Designation");
+        empDto.setEmployeeCards(new ArrayList<>());
+        empDto.setEmployeeId("42");
+        empDto.setEmployeeIssueDetails(new ArrayList<>());
+        empDto.setEmployeeName("Employee Name");
+        empDto.setGender("Gender");
+        assertEquals("Employee was Added", employeeDataServiceImpl.addEmployee(empDto));
+        verify(employeeRepository).save(Mockito.<Employee>any());
     }
 
     @Test
@@ -75,5 +120,28 @@ class EmployeeDataServiceImplTest {
         assertEquals("Om", response.get(1).getEmployeeName());
         assertEquals("Male", response.get(0).getGender());
         assertEquals("Male", response.get(1).getGender());
+    }
+
+    /**
+     * Method under test: {@link EmployeeDataServiceImpl#getAllEmployees()}
+     */
+    @Test
+    void testGetAllEmployees() {
+        ArrayList<Employee> employeeList = new ArrayList<>();
+        when(employeeRepository.findAll()).thenReturn(employeeList);
+        List<Employee> actualAllEmployees = employeeDataServiceImpl.getAllEmployees();
+        assertSame(employeeList, actualAllEmployees);
+        assertTrue(actualAllEmployees.isEmpty());
+        verify(employeeRepository).findAll();
+    }
+
+    /**
+     * Method under test: {@link EmployeeDataServiceImpl#deleteEmployee(String)}
+     */
+    @Test
+    void testDeleteEmployee() {
+        doNothing().when(employeeRepository).deleteById(Mockito.<String>any());
+        assertEquals("Employee was deleted!", employeeDataServiceImpl.deleteEmployee("42"));
+        verify(employeeRepository).deleteById(Mockito.<String>any());
     }
 }

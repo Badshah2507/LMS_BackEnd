@@ -7,10 +7,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class User {
     @Id
     @SequenceGenerator(name = "UUID", initialValue = 101, allocationSize = 1)

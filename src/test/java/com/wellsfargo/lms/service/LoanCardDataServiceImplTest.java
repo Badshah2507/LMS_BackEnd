@@ -6,6 +6,8 @@ import com.wellsfargo.lms.repository.LoanCardRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,11 +15,22 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class LoanCardDataServiceImplTest {
+
+    @Autowired
+    private LoanCardDataServiceImpl loanCardDataServiceImpl;
 
     @Autowired
     LoanCardDataService loanCardDataService;
@@ -46,6 +59,27 @@ class LoanCardDataServiceImplTest {
 
         String response = loanCardDataService.addLoanCard(loanCard);
         assertEquals("Loan Card added!", response);
+    }
+
+    /**
+     * Method under test: {@link LoanCardDataServiceImpl#addLoanCard(LoanCard)}
+     */
+    @Test
+    void testAddLoanCard() {
+        LoanCard loanCard = new LoanCard();
+        loanCard.setEmployeeCards(new ArrayList<>());
+        loanCard.setLoanDurationYrs(1);
+        loanCard.setLoanId("42");
+        loanCard.setLoanType("Loan Type");
+        when(loanCardRepository.save(Mockito.<LoanCard>any())).thenReturn(loanCard);
+
+        LoanCard loanCard2 = new LoanCard();
+        loanCard2.setEmployeeCards(new ArrayList<>());
+        loanCard2.setLoanDurationYrs(1);
+        loanCard2.setLoanId("42");
+        loanCard2.setLoanType("Loan Type");
+        assertEquals("Loan Card added!", loanCardDataServiceImpl.addLoanCard(loanCard2));
+        verify(loanCardRepository).save(Mockito.<LoanCard>any());
     }
 
     @Test
@@ -85,5 +119,28 @@ class LoanCardDataServiceImplTest {
         assertEquals(5, response.get(0).getLoanDurationYrs());
         assertEquals(2, response.get(1).getLoanDurationYrs());
         assertEquals(3, response.get(2).getLoanDurationYrs());
+    }
+
+    /**
+     * Method under test: {@link LoanCardDataServiceImpl#getAllLoanCards()}
+     */
+    @Test
+    void testGetAllLoanCards() {
+        ArrayList<LoanCard> loanCardList = new ArrayList<>();
+        when(loanCardRepository.findAll()).thenReturn(loanCardList);
+        List<LoanCard> actualAllLoanCards = loanCardDataServiceImpl.getAllLoanCards();
+        assertSame(loanCardList, actualAllLoanCards);
+        assertTrue(actualAllLoanCards.isEmpty());
+        verify(loanCardRepository).findAll();
+    }
+
+    /**
+     * Method under test: {@link LoanCardDataServiceImpl#deleteLoanCard(String)}
+     */
+    @Test
+    void testDeleteLoanCard() {
+        doNothing().when(loanCardRepository).deleteById(Mockito.<String>any());
+        assertEquals("Loan Card was deleted!", loanCardDataServiceImpl.deleteLoanCard("42"));
+        verify(loanCardRepository).deleteById(Mockito.<String>any());
     }
 }
