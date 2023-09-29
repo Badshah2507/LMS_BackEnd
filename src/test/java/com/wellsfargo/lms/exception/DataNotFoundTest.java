@@ -55,7 +55,7 @@ public class DataNotFoundTest {
 	@BeforeEach
     void setUp() {
         employee = Employee.builder()
-                .employeeId("101")
+                .employeeId(1L)
                 .dateOfBirth(new Date(02112001))
                 .dateOfJoining(new Date(30012023))
                 .department("Technology")

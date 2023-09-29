@@ -57,7 +57,7 @@ class LmsAdminControllerTest {
         when(userService.saveUser(Mockito.<User>any())).thenReturn("Save User");
 
         User user = new User();
-        user.setEmployeeId("42");
+        user.setEmployeeId(1L);
         user.setName("Name");
         user.setPassword("iloveyou");
         user.setRole("Role");
@@ -81,7 +81,7 @@ class LmsAdminControllerTest {
         when(userService.login(Mockito.<User>any())).thenReturn(new HashMap<>());
 
         User user = new User();
-        user.setEmployeeId("42");
+        user.setEmployeeId(1L);
         user.setName("Name");
         user.setPassword("iloveyou");
         user.setRole("Role");
@@ -114,7 +114,7 @@ class LmsAdminControllerTest {
         employee.setDepartment("Department");
         employee.setDesignation("Designation");
         employee.setEmployeeCards(new ArrayList<>());
-        employee.setEmployeeId("42");
+        employee.setEmployeeId(1L);
         employee.setEmployeeIssueDetails(new ArrayList<>());
         employee.setEmployeeName("Employee Name");
         employee.setGender("Gender");
@@ -147,7 +147,7 @@ class LmsAdminControllerTest {
         employee.setDepartment("Department");
         employee.setDesignation("Designation");
         employee.setEmployeeCards(new ArrayList<>());
-        employee.setEmployeeId("42");
+        employee.setEmployeeId(1L);
         employee.setEmployeeIssueDetails(new ArrayList<>());
         employee.setEmployeeName("Employee Name");
         employee.setGender("Gender");

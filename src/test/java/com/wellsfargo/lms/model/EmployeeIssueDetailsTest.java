@@ -29,7 +29,7 @@ class EmployeeIssueDetailsTest {
         employee.setDepartment("Department");
         employee.setDesignation("Designation");
         employee.setEmployeeCards(new ArrayList<>());
-        employee.setEmployeeId("42");
+        employee.setEmployeeId(1L);
         employee.setEmployeeIssueDetails(new ArrayList<>());
         employee.setEmployeeName("Employee Name");
         employee.setGender("Gender");

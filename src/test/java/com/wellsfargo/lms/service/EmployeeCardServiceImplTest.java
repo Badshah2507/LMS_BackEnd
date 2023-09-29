@@ -32,7 +32,7 @@ class EmployeeCardServiceImplTest {
     @BeforeEach
     void setUp() {
         employee = Employee.builder()
-                .employeeId("E0001")
+                .employeeId(1L)
                 .dateOfBirth(new Date(25072001))
                 .dateOfJoining(new Date(30012023))
                 .department("Technology")
@@ -62,7 +62,7 @@ class EmployeeCardServiceImplTest {
 
         List<EmployeeCard> response = employeeCardService.getEmployeeCard("E0001");
         assertEquals(1L, response.get(0).getEmployeeCardId());
-        assertEquals("E0001", response.get(0).getEmployee().getEmployeeId());
+        assertEquals(1L, response.get(0).getEmployee().getEmployeeId());
         assertEquals("Technology", response.get(0).getEmployee().getDepartment());
         assertEquals("Prathamesh", response.get(0).getEmployee().getEmployeeName());
         assertEquals("Male", response.get(0).getEmployee().getGender());

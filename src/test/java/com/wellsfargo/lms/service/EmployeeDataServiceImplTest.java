@@ -39,7 +39,7 @@ class EmployeeDataServiceImplTest {
     @Test
     void addEmployee() {
         Employee employee = Employee.builder()
-                .employeeId("E0001")
+                .employeeId(1L)
                 .dateOfBirth(new Date(25072001))
                 .dateOfJoining(new Date(30012023))
                 .department("Technology")
@@ -63,7 +63,7 @@ class EmployeeDataServiceImplTest {
         employee.setDepartment("Department");
         employee.setDesignation("Designation");
         employee.setEmployeeCards(new ArrayList<>());
-        employee.setEmployeeId("42");
+        employee.setEmployeeId(1L);
         employee.setEmployeeIssueDetails(new ArrayList<>());
         employee.setEmployeeName("Employee Name");
         employee.setGender("Gender");
@@ -75,7 +75,7 @@ class EmployeeDataServiceImplTest {
         empDto.setDepartment("Department");
         empDto.setDesignation("Designation");
         empDto.setEmployeeCards(new ArrayList<>());
-        empDto.setEmployeeId("42");
+        empDto.setEmployeeId(1L);
         empDto.setEmployeeIssueDetails(new ArrayList<>());
         empDto.setEmployeeName("Employee Name");
         empDto.setGender("Gender");
@@ -86,7 +86,7 @@ class EmployeeDataServiceImplTest {
     @Test
     void getAllEmployees() {
         Employee employee1 = Employee.builder()
-                .employeeId("E0001")
+                .employeeId(1L)
                 .dateOfBirth(new Date(25072001))
                 .dateOfJoining(new Date(30012023))
                 .department("Technology")
@@ -96,7 +96,7 @@ class EmployeeDataServiceImplTest {
                 .build();
 
         Employee employee2 = Employee.builder()
-                .employeeId("E0002")
+                .employeeId(2L)
                 .dateOfBirth(new Date(25072001))
                 .dateOfJoining(new Date(30012023))
                 .department("HR")
@@ -110,8 +110,8 @@ class EmployeeDataServiceImplTest {
         when(employeeRepository.findAll()).thenReturn(result);
 
         List<Employee> response = employeeDataService.getAllEmployees();
-        assertEquals("E0001", response.get(0).getEmployeeId());
-        assertEquals("E0002", response.get(1).getEmployeeId());
+        assertEquals(1L, response.get(0).getEmployeeId());
+        assertEquals(2L, response.get(1).getEmployeeId());
         assertEquals("Technology", response.get(0).getDepartment());
         assertEquals("HR", response.get(1).getDepartment());
         assertEquals("Associate", response.get(0).getDesignation());

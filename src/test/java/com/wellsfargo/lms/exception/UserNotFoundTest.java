@@ -45,7 +45,7 @@ public class UserNotFoundTest {
 	@Test
 	void testUserNotExists()
 	{
-		userObj = new User(1L,"abcd", "pwd", "Admin", "E0001");
+		userObj = new User(1L,"abcd", "pwd", "Admin", 1L);
 		
 		when(userRepository.findByName("abcd")).thenReturn(null);
 

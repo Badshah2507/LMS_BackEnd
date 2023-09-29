@@ -41,7 +41,7 @@ class ApplyLoanServiceImplTest {
     @BeforeEach
     void setUp() {
         employee = Employee.builder()
-                .employeeId("E0001")
+                .employeeId(1L)
                 .dateOfBirth(new Date(25072001))
                 .dateOfJoining(new Date(30012023))
                 .department("Technology")

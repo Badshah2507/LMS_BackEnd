@@ -34,13 +34,13 @@ class EmployeeTest {
         employee.setDepartment("Department");
         employee.setDesignation("Designation");
         employee.setEmployeeCards(new ArrayList<>());
-        employee.setEmployeeId("42");
+        employee.setEmployeeId(1L);
         employee.setEmployeeIssueDetails(new ArrayList<>());
         employee.setEmployeeName("Employee Name");
         employee.setGender("Gender");
 
         assertEquals(
-                "Employee{employeeId='42', employeeName='Employee Name', designation='Designation', department='Department',"
+                "Employee{employeeId='1', employeeName='Employee Name', designation='Designation', department='Department',"
                         + " gender='Gender', dateOfBirth=null, dateOfJoining=null}",
                 employee.toString());
     }
