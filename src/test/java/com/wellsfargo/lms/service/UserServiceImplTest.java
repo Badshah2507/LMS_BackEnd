@@ -37,7 +37,7 @@ class UserServiceImplTest {
 
     @Test
     void saveUser() {
-        userObj = new User(1L,"Om", "pwd", "Admin", "E0001");
+        userObj = new User(1L,"Om", "pwd", "Admin", 1L);
 
         String response = userService.saveUser(userObj);
         assertEquals("User Saved :-) !!!!", response);
@@ -45,12 +45,12 @@ class UserServiceImplTest {
 
     @Test
     void login() {
-        userObj = new User(1L,"Om", "pwd", "Admin", "E0001");
+        userObj = new User(1L,"Om", "pwd", "Admin", 1L);
         when(userRepository.findByName(any(String.class))).thenReturn(userObj);
 
-        Map<String, String> response = userService.login(userObj);
+        Map<String, Object> response = userService.login(userObj);
         assertEquals("Om", response.get("name"));
         assertEquals("Admin", response.get("role"));
-        assertEquals("E0001", response.get("empId"));
+        assertEquals(1L, response.get("empId"));
     }
 }

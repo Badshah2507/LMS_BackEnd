@@ -20,7 +20,7 @@ public class User {
     private String name;
     private String password;
     private String role;
-    private String employeeId;
+    private Long employeeId;
 
     public void setPassword(String password) {
         Base64.Encoder encoder = Base64.getEncoder();

@@ -17,8 +17,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Employee {
+
     @Id
-    String employeeId;
+    @SequenceGenerator(name = "emp_id_gen",initialValue = 20801160 ,allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_id_gen")
+    Long employeeId;
     String employeeName;
     String designation;
     String department;

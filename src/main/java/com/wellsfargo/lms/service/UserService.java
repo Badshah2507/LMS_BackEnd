@@ -8,5 +8,5 @@ import java.util.Map;
 
 public interface UserService {
     String saveUser(User user);
-    Map<String, String> login(User userDto);
+    Map<String, Object> login(User userDto);
 }

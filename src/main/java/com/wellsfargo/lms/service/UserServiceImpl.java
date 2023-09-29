@@ -34,12 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, String> login(User userDto) {
+    public Map<String, Object> login(User userDto) {
         User user = findUserByName(userDto.getName());
         if (user != null) {
             String pwdInDb = user.getPassword();
             if (pwdInDb.equals(userDto.getPassword())) {
-                Map<String, String> responseBody = new HashMap<>();
+                Map<String, Object> responseBody = new HashMap<>();
                 responseBody.put("name", user.getName());
                 responseBody.put("role", user.getRole());
                 responseBody.put("empId", user.getEmployeeId());

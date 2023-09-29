@@ -45,14 +45,20 @@ public class LmsAdminController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody User userDto) {
-        Map<String, String> user = userService.login(userDto);
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User userDto) {
+        Map<String, Object> user = userService.login(userDto);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/addEmployee")
     public ResponseEntity<String> addEmployee(@RequestBody Employee empDto) {
         String response = employeeDataService.addEmployee(empDto);
+        User userDto = new User();
+        userDto.setEmployeeId(empDto.getEmployeeId());
+        userDto.setPassword("user");
+        userDto.setName(empDto.getEmployeeName());
+        userDto.setRole("User");
+        userService.saveUser(userDto);
         if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
