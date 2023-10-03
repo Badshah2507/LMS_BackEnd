@@ -14,19 +14,7 @@ class EmployeeTest {
      */
     @Test
     void testToString() {
-        // TODO: Complete this test.
-        //   Reason: R002 Missing observers.
-        //   Diffblue Cover was unable to create an assertion.
-        //   Add getters for the following fields or make them package-private:
-        //     Employee.dateOfBirth
-        //     Employee.dateOfJoining
-        //     Employee.department
-        //     Employee.designation
-        //     Employee.employeeCards
-        //     Employee.employeeId
-        //     Employee.employeeIssueDetails
-        //     Employee.employeeName
-        //     Employee.gender
+        
 
         Employee employee = new Employee();
         employee.setDateOfBirth(null);
