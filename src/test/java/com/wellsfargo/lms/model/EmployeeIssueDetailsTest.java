@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 class EmployeeIssueDetailsTest {
-    /**
-     * Method under test: {@link EmployeeIssueDetails#toString()}
-     */
+   
     @Test
     void testToString() {
         // TODO: Complete this test.
