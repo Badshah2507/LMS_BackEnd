@@ -8,19 +8,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 class EmployeeCardTest {
-    /**
-     * Method under test: {@link EmployeeCard#toString()}
-     */
     @Test
     void testToString() {
-        // TODO: Complete this test.
-        //   Reason: R002 Missing observers.
-        //   Diffblue Cover was unable to create an assertion.
-        //   Add getters for the following fields or make them package-private:
-        //     EmployeeCard.EmployeeCardId
-        //     EmployeeCard.cardIssueDate
-        //     EmployeeCard.employee
-        //     EmployeeCard.loanCard
+
 
         Employee employee = new Employee();
         employee.setDateOfBirth(mock(Date.class));
